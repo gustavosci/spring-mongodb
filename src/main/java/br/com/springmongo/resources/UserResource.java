@@ -1,5 +1,6 @@
 package br.com.springmongo.resources;
 
+import br.com.springmongo.dto.UserDTO;
 import br.com.springmongo.entity.User;
 import br.com.springmongo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserResource {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         return ResponseEntity.ok().body(userService.findAll());
     }
 }
