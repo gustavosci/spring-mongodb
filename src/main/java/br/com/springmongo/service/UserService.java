@@ -28,13 +28,17 @@ public class UserService {
         return new UserDTO(user);
     }
 
-    public void delete(final String id){
+    public void delete(final String id) {
         findById(id);
         userRepository.deleteById(id);
     }
 
     public void insert(final UserDTO user) {
         userRepository.insert(fromDTO(user));
+    }
+
+    public void update(final User newUser) {
+        userRepository.save(newUser);
     }
 
     private User fromDTO(final UserDTO dto) {
