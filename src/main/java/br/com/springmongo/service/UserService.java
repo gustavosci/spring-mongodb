@@ -1,15 +1,14 @@
 package br.com.springmongo.service;
 
-import br.com.springmongo.dto.UserDTO;
-import br.com.springmongo.entity.User;
-import br.com.springmongo.repository.UserRepository;
-import br.com.springmongo.service.exception.ObjectNotFoundException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import br.com.springmongo.dto.UserDTO;
+import br.com.springmongo.entity.User;
+import br.com.springmongo.repository.UserRepository;
+import br.com.springmongo.service.exception.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -27,5 +26,13 @@ public class UserService {
         });
 
         return new UserDTO(user);
+    }
+
+    public void insert(final UserDTO user) {
+        userRepository.insert(fromDTO(user));
+    }
+
+    private User fromDTO(final UserDTO dto) {
+        return new User(null, dto.getName(), dto.getEmail());
     }
 }
