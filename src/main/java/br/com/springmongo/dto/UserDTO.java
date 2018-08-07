@@ -2,6 +2,8 @@ package br.com.springmongo.dto;
 
 import java.io.Serializable;
 
+import br.com.springmongo.entity.User;
+
 public class UserDTO implements Serializable{
 
     private static final long serialVersionUID = -6163519504259292155L;
@@ -12,9 +14,9 @@ public class UserDTO implements Serializable{
     public UserDTO() {
     }
 
-    public UserDTO(String name, String email) {
-        this.name = name;
-        this.email = email;
+    public UserDTO(final User user) {
+        this.name = user.getName();
+        this.email = user.getEmail();
     }
 
     public String getName() {
