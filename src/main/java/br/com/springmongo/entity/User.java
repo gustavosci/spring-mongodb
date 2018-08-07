@@ -1,10 +1,13 @@
 package br.com.springmongo.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
 public class User implements Serializable {
@@ -13,8 +16,13 @@ public class User implements Serializable {
 
     @Id
     private String id;
+
     private String name;
+
     private String email;
+
+    @DBRef(lazy = true) // Lazy = true indica que por padrão não carrega os posts ao carregar o usuário
+    private List<Post> posts = new ArrayList<>();
 
     public User() {
     }
@@ -49,10 +57,22 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(final List<Post> posts) {
+        this.posts = posts;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
         return Objects.equals(id, user.id);
     }
