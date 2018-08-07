@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.springmongo.dto.AuthorDTO;
+import br.com.springmongo.dto.CommentDTO;
 import br.com.springmongo.entity.Post;
 import br.com.springmongo.entity.User;
 import br.com.springmongo.repository.PostRepository;
@@ -49,5 +50,21 @@ public class Instantiation implements CommandLineRunner {
 
         dani.getPosts().addAll(Arrays.asList(post2, post3));
         userRepository.save(dani);
+
+        final CommentDTO comment1Post1 = new CommentDTO("Teste comment 1 Post 1", sdf.parse("04/08/2018"),
+            new AuthorDTO(dani));
+        final CommentDTO comment2Post1 = new CommentDTO("Teste comment 2 Post 1", sdf.parse("04/01/2016"),
+            new AuthorDTO(dani));
+
+        final CommentDTO comment1Post2 = new CommentDTO("Teste comment 1 Post 1", sdf.parse("04/08/2018"),
+            new AuthorDTO(gustavo));
+        final CommentDTO comment2Post2 = new CommentDTO("Teste comment 2 Post 1", sdf.parse("04/01/2016"),
+            new AuthorDTO(gustavo));
+
+        post1.getComments().addAll(Arrays.asList(comment1Post1, comment2Post1));
+        postRepository.save(post1);
+
+        post2.getComments().addAll(Arrays.asList(comment1Post2, comment2Post2));
+        postRepository.save(post2);
     }
 }
