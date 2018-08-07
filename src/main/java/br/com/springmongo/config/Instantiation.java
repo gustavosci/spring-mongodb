@@ -1,5 +1,6 @@
 package br.com.springmongo.config;
 
+import br.com.springmongo.dto.AuthorDTO;
 import br.com.springmongo.entity.Post;
 import br.com.springmongo.entity.User;
 import br.com.springmongo.repository.PostRepository;
@@ -37,8 +38,9 @@ public class Instantiation implements CommandLineRunner {
         final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-        final Post post1 = new Post(null, sdf.parse("27/10/1992"), "Partiu viagem", "Vamos a la playaa", gustavo);
-        final Post post2 = new Post(null, sdf.parse("13/11/1993"), "Vamo inter", "Rumo ao tetraa", dani);
+        final Post post1 = new Post(null, sdf.parse("27/10/1992"), "Partiu viagem", "Vamos a la playaa",
+            new AuthorDTO(gustavo));
+        final Post post2 = new Post(null, sdf.parse("13/11/1993"), "Vamo inter", "Rumo ao tetraa", new AuthorDTO(dani));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
