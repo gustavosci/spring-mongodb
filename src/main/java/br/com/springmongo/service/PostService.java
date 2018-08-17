@@ -7,6 +7,7 @@ import br.com.springmongo.entity.Post;
 import br.com.springmongo.repository.PostRepository;
 import br.com.springmongo.service.exception.ObjectNotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,4 +29,9 @@ public class PostService {
     public List<Post> findByTitle(final String text){
         return postRepository.findByTitleUsingQueryNative(text);
     }
+
+    public List<Post> fullSearch(final String text, final Date minDate, final Date maxDate){
+        return postRepository.fullSearch(text, minDate, maxDate);
+    }
+
 }
