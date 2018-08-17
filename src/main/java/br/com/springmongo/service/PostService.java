@@ -7,6 +7,8 @@ import br.com.springmongo.entity.Post;
 import br.com.springmongo.repository.PostRepository;
 import br.com.springmongo.service.exception.ObjectNotFoundException;
 
+import java.util.List;
+
 @Service
 public class PostService {
 
@@ -17,5 +19,13 @@ public class PostService {
         return postRepository.findById(id).orElseThrow(() -> {
             return new ObjectNotFoundException("Post não encontrado");
         });
+    }
+
+    public List<Post> findAll(){
+        return postRepository.findAll();
+    }
+
+    public List<Post> findByTitle(final String text){
+        return postRepository.findByTitleContainingIgnoreCase(text);
     }
 }
